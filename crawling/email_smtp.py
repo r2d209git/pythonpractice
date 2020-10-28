@@ -2,6 +2,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib
 
+
 # 본 코드는 smtp.login에서 https://m.blog.naver.com/chandong83/221705512963 이유로 동작하지 않음
 # SMTP 접속을 위한 서버, 계정 설정
 SMTP_SERVER = "smtp.gmail.com"
