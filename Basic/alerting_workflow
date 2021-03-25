@@ -1,0 +1,26 @@
+digraph "Alerting Workflow" {
+	graph [fontcolor="#2D3436" fontname="Sans-Serif" fontsize=15 label="Alerting Workflow" nodesep=0.60 pad=2.0 rankdir=LR ranksep=0.75 splines=ortho]
+	node [fixedsize=true fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [color="#7B8894"]
+	"44be338ddc8f42dfbafaaa3f755b57ea" -> d1da2e140af443f7b41bf139a62a3a89 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	ee62aa5156d64c5f886a6e9e0be18c1f -> d1da2e140af443f7b41bf139a62a3a89 [dir=none fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	d1da2e140af443f7b41bf139a62a3a89 -> f65201ceb8384004a38394fe770d8017 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	f65201ceb8384004a38394fe770d8017 -> "0e78c7e3ea0e4a7c94b96e2f498c1589" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	subgraph "cluster_main account" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="main account" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"44be338ddc8f42dfbafaaa3f755b57ea" [label="SNS Topic" height=1.9 image="C:\ProgramData\Anaconda3\lib\site-packages\resources/aws/integration\simple-notification-service-sns.png" shape=none]
+		subgraph cluster_Lamda {
+			graph [bgcolor="#EBF3E7" fontname="Sans-Serif" fontsize=12 label=Lamda labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+			d1da2e140af443f7b41bf139a62a3a89 [label=processor height=1.9 image="C:\ProgramData\Anaconda3\lib\site-packages\resources/aws/compute\lambda.png" shape=none]
+			ee62aa5156d64c5f886a6e9e0be18c1f [label="lamda source" height=1.9 image="C:\ProgramData\Anaconda3\lib\site-packages\resources/aws/storage\simple-storage-service-s3.png" shape=none]
+		}
+		f65201ceb8384004a38394fe770d8017 [label=Cloudwatch height=1.9 image="C:\ProgramData\Anaconda3\lib\site-packages\resources/aws/management\cloudwatch.png" shape=none]
+		"0e78c7e3ea0e4a7c94b96e2f498c1589" [label="Cloudwatch
+event rule" height=2.3 image="C:\ProgramData\Anaconda3\lib\site-packages\resources/aws/integration\eventbridge.png" shape=none]
+	}
+	"0e78c7e3ea0e4a7c94b96e2f498c1589" -> "634210651624409eaaaac1fa993a6151" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	subgraph "cluster_Event Bus" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="Event Bus" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"634210651624409eaaaac1fa993a6151" [label=bus height=1.9 image="C:\ProgramData\Anaconda3\lib\site-packages\resources/onprem/queue\activemq.png" shape=none]
+	}
+}
